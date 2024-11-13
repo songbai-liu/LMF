@@ -91,18 +91,18 @@ classdef LMF6 < PROBLEM
              %varialbe linkages between distance-ralated variables and
             if obj.type_lk == 0 % linear linkages
                 for i = obj.K+1 : D
-                    PopDec(:,i) = (1+i./obj.L).*(PopDec(:,i)-obj.Global.lower(i)) - yp(:,1).*(obj.Global.upper(i)-obj.Global.lower(i));   
+                    PopDec(:,i) = (1+(i-obj.K)./obj.L).*(PopDec(:,i)-obj.Global.lower(i)) - yp(:,1).*(obj.Global.upper(i)-obj.Global.lower(i));   
                 end 
             elseif obj.type_lk == 1 % nonlinear linkages
                 for i = obj.K+1 : D
-                    PopDec(:,i) = (1+cos(i./obj.L*pi/2)).*(PopDec(:,i)-obj.Global.lower(i)) - yp(:,1).*(obj.Global.upper(i)-obj.Global.lower(i));
+                    PopDec(:,i) = (1+cos((i-obj.K)./obj.L*pi/2)).*(PopDec(:,i)-obj.Global.lower(i)) - yp(:,1).*(obj.Global.upper(i)-obj.Global.lower(i));
                 end
             else                   %mixed linkages
                 for i = obj.K+1 : 2 : D
-                    PopDec(:,i) = (1+i./obj.L).*(PopDec(:,i)-obj.Global.lower(i)) - yp(:,1).*(obj.Global.upper(i)-obj.Global.lower(i));
+                    PopDec(:,i) = (1+(i-obj.K)./obj.L).*(PopDec(:,i)-obj.Global.lower(i)) - yp(:,1).*(obj.Global.upper(i)-obj.Global.lower(i));
                 end
                 for i = obj.K+2 : 2 : D
-                    PopDec(:,i) = (1+cos(i./obj.L*pi/2)).*(PopDec(:,i)-obj.Global.lower(i)) - yp(:,1).*(obj.Global.upper(i)-obj.Global.lower(i));
+                    PopDec(:,i) = (1+cos((i-obj.K)./obj.L*pi/2)).*(PopDec(:,i)-obj.Global.lower(i)) - yp(:,1).*(obj.Global.upper(i)-obj.Global.lower(i));
                 end
             end
             x = PopDec;
